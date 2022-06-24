@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Comment from "./component/Comment";
+import Posts from "./component/Posts";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./component/Navbar";
+import Dashboard from "./component/Dashboard";
+import { useEffect } from "react";
+import { useState } from "react";
+import Profile from "./component/Profile";
 
 function App() {
+  const [users, setUsers] = useState("");
+  const [id, setId] = useState(0);
+  const [profileUser, setProfileUser] = useState([]);
+
+  const fetchUsers = async () => {
+    const data = await fetch("https://jsonplaceholder.typicode.com/users");
+    setUsers(await data.json());
+  };
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+  const profileIdHandler = (rid) => {
+    setId(rid);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      {/* //Navbar content */}
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Posts />} />
+        <Route exact path="/dashboard" element={<Dashboard users={users} profileIdHandler={profileIdHandler} />} />
+        <Route path="/Posts" element={<Posts />} />
+        <Route path="/Comment" element={<Comment />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
