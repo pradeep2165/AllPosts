@@ -10,21 +10,23 @@ export default function Users(props) {
             return (
               <li className="list-group-item" key={index}>
                 <button className="btn sm-btn btn-outline-info">{user.username}</button>
-                <i
-                  className="fa-solid fa-user float-end"
-                  onClick={() => {
-                    // hide/show
-                    if (document.getElementById(user.id).classList.contains("d-none")) {
-                      document.getElementById(user.id).classList.remove("d-none");
-                      document.getElementById(user.id).classList.add("d-block");
-                    } else {
-                      document.getElementById(user.id).classList.remove("d-block");
-                      document.getElementById(user.id).classList.add("d-none");
-                    }
-                  }}
-                ></i>
+                <button className="btn btn-outline-primary float-end mb-2">
+                  <i
+                    className="fa-solid fa-user"
+                    onClick={() => {
+                      // hide/show
+                      if (document.getElementById(user.email).classList.contains("d-none")) {
+                        document.getElementById(user.email).classList.remove("d-none");
+                        document.getElementById(user.email).classList.add("d-block");
+                      } else {
+                        document.getElementById(user.email).classList.remove("d-block");
+                        document.getElementById(user.email).classList.add("d-none");
+                      }
+                    }}
+                  ></i>
+                </button>
                 <div>
-                  <div className="col-sm-12 d-none" id={user.id}>
+                  <div className="col-sm-12 d-none" id={user.email}>
                     <div className="card border-0">
                       <div className="card-body">
                         <h5 className="card-title">{user.name}</h5>

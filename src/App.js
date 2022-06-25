@@ -10,8 +10,6 @@ import Profile from "./component/Profile";
 
 function App() {
   const [users, setUsers] = useState("");
-  const [id, setId] = useState(0);
-  const [profileUser, setProfileUser] = useState([]);
 
   const fetchUsers = async () => {
     const data = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -20,9 +18,6 @@ function App() {
   useEffect(() => {
     fetchUsers();
   }, []);
-  const profileIdHandler = (rid) => {
-    setId(rid);
-  };
 
   return (
     <BrowserRouter>
@@ -30,7 +25,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Posts />} />
-        <Route exact path="/dashboard" element={<Dashboard users={users} profileIdHandler={profileIdHandler} />} />
+        <Route exact path="/dashboard" element={<Dashboard users={users} />} />
         <Route path="/Posts" element={<Posts />} />
         <Route path="/Comment" element={<Comment />} />
         <Route path="/profile" element={<Profile />} />
