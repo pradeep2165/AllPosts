@@ -24,7 +24,7 @@ function App() {
       {/* //Navbar content */}
       <Navbar />
       <Routes>
-        <Route path="/" element={<Posts />} />
+        <Route path="/AllPosts" element={<Dashboard users={users} />} />
         <Route exact path="/dashboard" element={<Dashboard users={users} />} />
         <Route path="/Posts" element={<Posts />} />
         <Route path="/Comment" element={<Comment />} />
